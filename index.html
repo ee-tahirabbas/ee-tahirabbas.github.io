@@ -3,194 +3,214 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Tahir Abbas — Electrical Engineer</title>
-<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<title>Tahir Abbas — Electrical Engineer & AI Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
 <style>
-:root {
-  --bg:#0d1f33; --surf:#112540; --surf2:#163050; --surf3:#0a1826;
-  --border:rgba(60,140,220,0.18); --borderhi:rgba(70,200,255,0.38);
-  --text:#e8f4ff; --textmid:#8bbedd; --textdim:#4e7fa0; --textsub:#2f5570;
-  --cyan:#29c6f5; --green:#00e07a; --yellow:#ffce3a;
-  --orange:#ff8530; --red:#ff4560; --purple:#a78bfa; --nav-h:60px;
+:root{
+  --bg:#080d14;--surf:#0d1520;--surf2:#111c2b;--surf3:#0a1018;
+  --border:rgba(0,200,255,0.1);--borderhi:rgba(0,200,255,0.35);
+  --text:#f0f8ff;--textmid:#7fb3d0;--textdim:#3d6980;
+  --neon:#00c8ff;--neon2:#7b2fff;--green:#00ffaa;--yellow:#ffd60a;--orange:#ff6b2b;
+  --nav-h:64px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;line-height:1.6;}
-::-webkit-scrollbar{width:5px;}
+body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',sans-serif;line-height:1.6;overflow-x:hidden;}
+::-webkit-scrollbar{width:4px;}
 ::-webkit-scrollbar-track{background:var(--bg);}
-::-webkit-scrollbar-thumb{background:#1b3a58;border-radius:3px;}
+::-webkit-scrollbar-thumb{background:var(--neon);opacity:.3;border-radius:2px;}
+a{text-decoration:none;color:inherit;}
+
+/* CANVAS BG */
+#bg-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.35;}
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--nav-h);background:rgba(13,31,51,0.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 40px;}
-.nav-logo{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:var(--cyan);letter-spacing:.08em;}
-.nav-logo span{color:var(--textmid);}
-.nav-links{display:flex;gap:28px;list-style:none;}
-.nav-links a{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--textmid);text-decoration:none;letter-spacing:.1em;text-transform:uppercase;transition:color .2s;}
-.nav-links a:hover{color:var(--cyan);}
-.nav-cta{padding:7px 18px;border-radius:6px;border:1px solid var(--cyan);background:rgba(41,198,245,.1);color:var(--cyan);font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:600;text-decoration:none;transition:all .2s;}
-.nav-cta:hover{background:rgba(41,198,245,.22);}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--nav-h);background:rgba(8,13,20,0.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 48px;}
+.nav-logo{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:600;color:var(--neon);letter-spacing:.04em;}
+.nav-logo span{color:var(--neon2);}
+.nav-links{display:flex;gap:32px;list-style:none;}
+.nav-links a{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--textmid);letter-spacing:.14em;text-transform:uppercase;transition:color .2s;position:relative;}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--neon);transition:width .3s;}
+.nav-links a:hover{color:var(--neon);}
+.nav-links a:hover::after{width:100%;}
+.nav-cta{padding:8px 20px;border-radius:6px;border:1px solid var(--neon);background:transparent;color:var(--neon);font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;transition:all .25s;cursor:pointer;}
+.nav-cta:hover{background:rgba(0,200,255,.12);box-shadow:0 0 20px rgba(0,200,255,.2);}
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;}
-.hamburger span{width:22px;height:2px;background:var(--textmid);border-radius:2px;}
+.hamburger span{width:22px;height:1.5px;background:var(--textmid);border-radius:2px;transition:all .3s;}
 
-/* SECTIONS */
-.wrap{max-width:1100px;margin:0 auto;padding:90px 40px;}
-.section-label{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--cyan);letter-spacing:.2em;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
-.section-label::after{content:'';flex:1;max-width:60px;height:1px;background:var(--cyan);opacity:.4;}
-.section-title{font-size:32px;font-weight:700;color:var(--text);margin-bottom:36px;}
-.section-divider{max-width:1100px;margin:0 auto;height:1px;background:var(--border);}
+/* WRAPPER */
+.wrap{max-width:1100px;margin:0 auto;padding:90px 48px;position:relative;z-index:1;}
+.section-label{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--neon);letter-spacing:.25em;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:10px;}
+.section-label::before{content:'//';color:var(--neon2);}
+.section-title{font-size:clamp(26px,3vw,38px);font-weight:700;color:var(--text);margin-bottom:40px;letter-spacing:-.02em;}
+.section-title span{color:var(--neon);}
+.sdiv{height:1px;background:linear-gradient(90deg,var(--neon) 0%,transparent 60%);opacity:.2;max-width:1100px;margin:0 auto;}
 
 /* HERO */
-#hero{min-height:100vh;display:flex;align-items:center;max-width:1100px;margin:0 auto;padding:calc(var(--nav-h) + 40px) 40px 60px;}
-.hero-inner{display:grid;grid-template-columns:1fr 230px;gap:60px;align-items:center;width:100%;}
-.hero-tag{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--cyan);letter-spacing:.18em;text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:10px;}
-.hero-tag::before{content:'';width:30px;height:1px;background:var(--cyan);}
-.hero-name{font-size:clamp(36px,5vw,62px);font-weight:800;line-height:1.05;color:var(--text);margin-bottom:12px;}
-.hero-name span{color:var(--cyan);}
-.hero-role{font-size:clamp(14px,1.8vw,18px);color:var(--textmid);margin-bottom:20px;line-height:1.6;}
-.hero-role strong{color:var(--yellow);}
-.hero-desc{font-size:15px;color:var(--textdim);max-width:520px;line-height:1.8;margin-bottom:32px;}
-.hero-btns{display:flex;gap:12px;flex-wrap:wrap;}
-.btn-primary{padding:11px 26px;border-radius:7px;background:rgba(41,198,245,.14);border:1px solid var(--cyan);color:var(--cyan);font-weight:600;font-size:13px;text-decoration:none;transition:all .2s;}
-.btn-primary:hover{background:rgba(41,198,245,.26);transform:translateY(-1px);}
-.btn-ghost{padding:11px 26px;border-radius:7px;background:transparent;border:1px solid var(--border);color:var(--textmid);font-size:13px;text-decoration:none;transition:all .2s;}
-.btn-ghost:hover{border-color:var(--textmid);color:var(--text);}
-.hero-card{background:var(--surf);border:1px solid var(--border);border-radius:14px;padding:24px;}
-.hero-stat{margin-bottom:16px;}
-.hs-val{font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:700;color:var(--cyan);line-height:1;}
-.hs-lbl{font-size:11px;color:var(--textmid);margin-top:4px;}
-.hdiv{height:1px;background:var(--border);margin:14px 0;}
-.status-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);margin-right:6px;animation:pulse 2s infinite;}
-@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
-.hero-status{font-size:11px;color:var(--green);font-family:'JetBrains Mono',monospace;}
+#hero{min-height:100vh;display:flex;align-items:center;max-width:1100px;margin:0 auto;padding:var(--nav-h) 48px 0;position:relative;z-index:1;}
+.hero-inner{width:100%;}
+.hero-tag{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--neon2);letter-spacing:.2em;text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:12px;}
+.hero-tag::before{content:'';width:40px;height:1px;background:var(--neon2);}
+.hero-name{font-size:clamp(48px,7vw,90px);font-weight:700;line-height:1;letter-spacing:-.04em;margin-bottom:16px;color:var(--text);}
+.hero-name .neon{color:var(--neon);text-shadow:0 0 40px rgba(0,200,255,.3);}
+.hero-typed{font-size:clamp(16px,2vw,22px);color:var(--textmid);margin-bottom:28px;font-weight:400;min-height:32px;}
+.hero-typed .cursor{display:inline-block;width:2px;height:1.1em;background:var(--neon);margin-left:3px;vertical-align:middle;animation:blink .7s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+.hero-desc{font-size:16px;color:var(--textdim);max-width:580px;line-height:1.8;margin-bottom:40px;}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:60px;}
+.btn-neon{padding:13px 32px;border-radius:6px;background:transparent;border:1px solid var(--neon);color:var(--neon);font-weight:600;font-size:13px;letter-spacing:.06em;transition:all .25s;cursor:pointer;font-family:'Space Grotesk',sans-serif;}
+.btn-neon:hover{background:rgba(0,200,255,.1);box-shadow:0 0 30px rgba(0,200,255,.2);transform:translateY(-2px);}
+.btn-solid{padding:13px 32px;border-radius:6px;background:var(--neon);color:var(--bg);font-weight:700;font-size:13px;letter-spacing:.04em;transition:all .25s;cursor:pointer;border:1px solid transparent;font-family:'Space Grotesk',sans-serif;}
+.btn-solid:hover{box-shadow:0 0 30px rgba(0,200,255,.4);transform:translateY(-2px);}
+.hero-stats{display:flex;gap:40px;flex-wrap:wrap;}
+.hstat{border-left:2px solid var(--neon);padding-left:16px;}
+.hstat-val{font-family:'JetBrains Mono',monospace;font-size:32px;font-weight:600;color:var(--neon);line-height:1;}
+.hstat-lbl{font-size:12px;color:var(--textdim);margin-top:4px;letter-spacing:.06em;}
+.status-wrap{display:flex;align-items:center;gap:8px;margin-top:8px;}
+.sdot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;flex-shrink:0;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(0,255,170,.4);}70%{box-shadow:0 0 0 8px rgba(0,255,170,0);}}
+.stext{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--green);}
 
 /* ABOUT */
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;}
-.about-text p{font-size:15px;color:var(--textmid);line-height:1.85;margin-bottom:16px;}
-.about-text p strong{color:var(--text);}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
+.about-text p{font-size:15px;color:var(--textmid);line-height:1.9;margin-bottom:18px;}
+.about-text strong{color:var(--text);}
 .about-cards{display:flex;flex-direction:column;gap:12px;}
-.about-card{background:var(--surf);border:1px solid var(--border);border-radius:10px;padding:16px 18px;display:flex;align-items:flex-start;gap:14px;transition:border-color .2s;}
-.about-card:hover{border-color:var(--borderhi);}
-.ac-icon{font-size:22px;margin-top:2px;}
-.ac-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:3px;}
-.ac-sub{font-size:11.5px;color:var(--textdim);line-height:1.5;}
+.acard{background:var(--surf);border:1px solid var(--border);border-radius:12px;padding:18px 20px;display:flex;align-items:flex-start;gap:14px;transition:all .25s;position:relative;overflow:hidden;}
+.acard::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--neon);transform:scaleY(0);transition:transform .3s;}
+.acard:hover{border-color:var(--borderhi);transform:translateX(4px);}
+.acard:hover::before{transform:scaleY(1);}
+.acard-icon{width:40px;height:40px;border-radius:8px;background:rgba(0,200,255,.08);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.acard-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:3px;}
+.acard-sub{font-size:11.5px;color:var(--textdim);line-height:1.5;}
 
 /* SKILLS */
 .skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;}
-.skill-card{background:var(--surf);border:1px solid var(--border);border-radius:10px;padding:20px;transition:border-color .2s;}
-.skill-card:hover{border-color:var(--borderhi);}
-.sk-header{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
-.sk-icon{font-size:20px;}
-.sk-title{font-size:11px;color:var(--textmid);font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.1em;}
-.sk-tags{display:flex;flex-wrap:wrap;gap:7px;}
-.tag{padding:4px 10px;border-radius:5px;font-size:10.5px;font-family:'JetBrains Mono',monospace;font-weight:500;}
-.tag-cyan  {background:rgba(41,198,245,.1);color:var(--cyan);border:1px solid rgba(41,198,245,.25);}
-.tag-green {background:rgba(0,224,122,.1);color:var(--green);border:1px solid rgba(0,224,122,.25);}
-.tag-yellow{background:rgba(255,206,58,.1);color:var(--yellow);border:1px solid rgba(255,206,58,.25);}
-.tag-purple{background:rgba(167,139,250,.1);color:var(--purple);border:1px solid rgba(167,139,250,.25);}
-.tag-orange{background:rgba(255,133,48,.1);color:var(--orange);border:1px solid rgba(255,133,48,.25);}
-.tag-dim   {background:rgba(60,100,130,.1);color:var(--textmid);border:1px solid rgba(60,100,130,.25);}
+.scard{background:var(--surf);border:1px solid var(--border);border-radius:12px;padding:22px;transition:all .25s;}
+.scard:hover{border-color:var(--borderhi);background:var(--surf2);}
+.scard-head{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+.scard-icon{font-size:20px;}
+.scard-title{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--neon);text-transform:uppercase;letter-spacing:.14em;}
+.tags{display:flex;flex-wrap:wrap;gap:7px;}
+.tag{padding:5px 11px;border-radius:5px;font-size:10.5px;font-family:'JetBrains Mono',monospace;font-weight:500;border:1px solid;}
+.tc{color:var(--neon);border-color:rgba(0,200,255,.25);background:rgba(0,200,255,.06);}
+.tg{color:var(--green);border-color:rgba(0,255,170,.25);background:rgba(0,255,170,.06);}
+.ty{color:var(--yellow);border-color:rgba(255,214,10,.25);background:rgba(255,214,10,.06);}
+.tp{color:#b07aff;border-color:rgba(176,122,255,.25);background:rgba(176,122,255,.06);}
+.to{color:var(--orange);border-color:rgba(255,107,43,.25);background:rgba(255,107,43,.06);}
+.td{color:var(--textmid);border-color:rgba(127,179,208,.15);background:rgba(127,179,208,.04);}
 
 /* PROJECTS */
-.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px;}
-.project-card{background:var(--surf);border:1px solid var(--border);border-radius:12px;padding:24px;display:flex;flex-direction:column;transition:all .2s;position:relative;overflow:hidden;}
-.project-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
-.pc-cyan::before{background:var(--cyan);}
-.pc-green::before{background:var(--green);}
-.pc-yellow::before{background:var(--yellow);}
-.pc-purple::before{background:var(--purple);}
-.project-card:hover{border-color:var(--borderhi);transform:translateY(-2px);}
-.proj-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;}
-.proj-icon{font-size:26px;}
-.proj-links{display:flex;gap:8px;}
-.proj-link{font-size:10px;font-family:'JetBrains Mono',monospace;color:var(--textmid);text-decoration:none;padding:3px 9px;border-radius:4px;border:1px solid var(--border);transition:all .2s;}
-.proj-link:hover{color:var(--cyan);border-color:var(--cyan);}
-.proj-title{font-size:16px;font-weight:700;color:var(--text);margin-bottom:8px;}
-.proj-desc{font-size:13px;color:var(--textdim);line-height:1.7;flex:1;margin-bottom:16px;}
-.proj-stack{display:flex;flex-wrap:wrap;gap:6px;}
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:24px;}
+.pcard{background:var(--surf);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:all .3s;display:flex;flex-direction:column;}
+.pcard:hover{border-color:var(--borderhi);transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.4);}
+.pcard-img{height:180px;background:var(--surf2);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.pcard-img-placeholder{display:flex;flex-direction:column;align-items:center;gap:8px;}
+.pcard-img-icon{font-size:48px;opacity:.4;}
+.pcard-img-txt{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--textdim);letter-spacing:.1em;text-transform:uppercase;}
+.pcard-img-overlay{position:absolute;bottom:0;left:0;right:0;height:40px;background:linear-gradient(transparent,var(--surf));}
+.pcard-accent{height:2px;width:100%;}
+.pcard-body{padding:20px;flex:1;display:flex;flex-direction:column;}
+.pcard-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+.pcard-badge{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border-radius:4px;}
+.pb-live{color:var(--green);background:rgba(0,255,170,.08);border:1px solid rgba(0,255,170,.2);}
+.pb-dev{color:var(--yellow);background:rgba(255,214,10,.08);border:1px solid rgba(255,214,10,.2);}
+.pb-fyp{color:#b07aff;background:rgba(176,122,255,.08);border:1px solid rgba(176,122,255,.2);}
+.pcard-links{display:flex;gap:8px;}
+.plink{font-size:10px;font-family:'JetBrains Mono',monospace;color:var(--textmid);padding:4px 10px;border-radius:4px;border:1px solid var(--border);transition:all .2s;}
+.plink:hover{color:var(--neon);border-color:var(--neon);}
+.pcard-title{font-size:17px;font-weight:700;color:var(--text);margin-bottom:8px;}
+.pcard-desc{font-size:13px;color:var(--textdim);line-height:1.7;flex:1;margin-bottom:16px;}
+.pcard-stack{display:flex;flex-wrap:wrap;gap:6px;}
 
 /* TIMELINE */
-.timeline{position:relative;padding-left:28px;}
-.timeline::before{content:'';position:absolute;left:7px;top:8px;bottom:8px;width:1px;background:var(--border);}
-.tl-item{position:relative;margin-bottom:28px;}
+.timeline{position:relative;padding-left:32px;}
+.timeline::before{content:'';position:absolute;left:9px;top:10px;bottom:10px;width:1px;background:linear-gradient(var(--neon2),var(--neon),transparent);}
+.tl-item{position:relative;margin-bottom:30px;}
 .tl-item:last-child{margin-bottom:0;}
-.tl-dot{position:absolute;left:-28px;top:6px;width:14px;height:14px;border-radius:50%;border:2px solid var(--cyan);background:var(--bg);display:flex;align-items:center;justify-content:center;}
-.tl-dot::after{content:'';width:5px;height:5px;border-radius:50%;background:var(--cyan);}
-.tl-card{background:var(--surf);border:1px solid var(--border);border-radius:10px;padding:20px 22px;transition:border-color .2s;}
+.tl-dot{position:absolute;left:-32px;top:8px;width:16px;height:16px;border-radius:50%;border:1.5px solid var(--neon);background:var(--bg);display:flex;align-items:center;justify-content:center;box-shadow:0 0 12px rgba(0,200,255,.3);}
+.tl-dot::after{content:'';width:6px;height:6px;border-radius:50%;background:var(--neon);}
+.tl-card{background:var(--surf);border:1px solid var(--border);border-radius:12px;padding:22px;transition:all .25s;}
 .tl-card:hover{border-color:var(--borderhi);}
 .tl-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;margin-bottom:4px;}
-.tl-role{font-size:15px;font-weight:700;color:var(--text);}
-.tl-period{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--textdim);padding:3px 9px;border-radius:4px;border:1px solid var(--border);background:var(--surf2);white-space:nowrap;}
-.tl-company{font-size:12px;color:var(--cyan);margin-bottom:12px;font-weight:500;}
-.tl-points{list-style:none;padding:0;}
-.tl-points li{font-size:13px;color:var(--textdim);padding:3px 0 3px 16px;position:relative;line-height:1.6;}
-.tl-points li::before{content:'›';position:absolute;left:0;color:var(--cyan);font-weight:700;}
+.tl-role{font-size:16px;font-weight:700;color:var(--text);}
+.tl-period{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--neon);padding:4px 10px;border-radius:5px;border:1px solid rgba(0,200,255,.2);background:rgba(0,200,255,.05);white-space:nowrap;}
+.tl-co{font-size:12px;color:var(--neon2);margin-bottom:12px;font-weight:500;}
+.tl-pts{list-style:none;}
+.tl-pts li{font-size:13px;color:var(--textdim);padding:3px 0 3px 18px;position:relative;line-height:1.65;}
+.tl-pts li::before{content:'▸';position:absolute;left:0;color:var(--neon);font-size:10px;top:5px;}
 
 /* CERTS */
 .cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;}
-.cert-card{background:var(--surf);border:1px solid var(--border);border-radius:10px;padding:18px 20px;display:flex;align-items:flex-start;gap:14px;transition:border-color .2s;}
-.cert-card:hover{border-color:var(--borderhi);}
-.cert-icon{font-size:24px;flex-shrink:0;}
-.cert-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px;}
-.cert-org{font-size:11px;color:var(--cyan);margin-bottom:3px;}
-.cert-year{font-size:10.5px;color:var(--textdim);font-family:'JetBrains Mono',monospace;}
+.cert-card{background:var(--surf);border:1px solid var(--border);border-radius:12px;padding:20px;display:flex;align-items:flex-start;gap:14px;transition:all .25s;}
+.cert-card:hover{border-color:var(--borderhi);background:var(--surf2);}
+.cert-icon{width:42px;height:42px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;border:1px solid var(--border);}
+.cert-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px;line-height:1.4;}
+.cert-org{font-size:11px;color:var(--neon);margin-bottom:3px;}
+.cert-yr{font-size:10px;color:var(--textdim);font-family:'JetBrains Mono',monospace;}
 
-/* EDUCATION */
-.edu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin-top:16px;}
-.edu-card{background:var(--surf);border:1px solid var(--border);border-radius:10px;padding:20px;transition:border-color .2s;}
+/* EDU */
+.edu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin-top:18px;}
+.edu-card{background:var(--surf);border:1px solid var(--border);border-radius:12px;padding:20px;transition:all .25s;}
 .edu-card:hover{border-color:var(--borderhi);}
 .edu-deg{font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px;}
-.edu-uni{font-size:12px;color:var(--cyan);margin-bottom:10px;}
-.edu-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid rgba(60,140,220,0.08);font-size:11.5px;}
+.edu-uni{font-size:12px;color:var(--neon);margin-bottom:12px;}
+.edu-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid rgba(0,200,255,.06);font-size:11.5px;}
 .edu-row:last-child{border-bottom:none;}
 .edu-row span:first-child{color:var(--textdim);}
-.edu-row span:last-child{color:var(--text);font-family:'JetBrains Mono',monospace;font-weight:600;}
+.edu-row span:last-child{font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--neon);}
 
 /* CONTACT */
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;}
-.contact-info{display:flex;flex-direction:column;gap:12px;}
-.contact-item{background:var(--surf);border:1px solid var(--border);border-radius:10px;padding:16px 18px;display:flex;align-items:center;gap:14px;text-decoration:none;transition:border-color .2s;}
-.contact-item:hover{border-color:var(--cyan);}
-.ci-icon{font-size:20px;}
-.ci-label{font-size:10px;color:var(--textdim);font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.1em;margin-bottom:2px;}
+.cinfo{display:flex;flex-direction:column;gap:12px;}
+.citem{background:var(--surf);border:1px solid var(--border);border-radius:12px;padding:16px 20px;display:flex;align-items:center;gap:14px;transition:all .25s;}
+.citem:hover{border-color:var(--neon);background:rgba(0,200,255,.04);}
+.citem-icon{width:38px;height:38px;border-radius:8px;background:rgba(0,200,255,.08);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.ci-lbl{font-size:9.5px;color:var(--textdim);font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.1em;margin-bottom:2px;}
 .ci-val{font-size:13px;color:var(--text);font-weight:500;}
-.contact-note{background:var(--surf);border:1px solid var(--border);border-radius:10px;padding:28px;}
-.cn-title{font-size:18px;font-weight:700;color:var(--text);margin-bottom:10px;}
-.cn-text{font-size:14px;color:var(--textdim);line-height:1.8;margin-bottom:20px;}
-.cn-available{display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--green);margin-bottom:20px;}
+.cnote{background:var(--surf);border:1px solid var(--border);border-radius:14px;padding:30px;}
+.cn-title{font-size:20px;font-weight:700;color:var(--text);margin-bottom:10px;}
+.cn-text{font-size:14px;color:var(--textdim);line-height:1.85;margin-bottom:24px;}
+.cn-avail{display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--green);margin-bottom:24px;}
 
 /* FOOTER */
-footer{text-align:center;padding:28px 40px;border-top:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--textdim);}
+footer{text-align:center;padding:28px;border-top:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--textdim);position:relative;z-index:1;}
+footer span{color:var(--neon);}
+
+/* SCROLL REVEAL */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.visible{opacity:1;transform:none;}
 
 /* RESPONSIVE */
 @media(max-width:900px){
-  .hero-inner,.about-grid,.contact-grid{grid-template-columns:1fr;}
-  .hero-card{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
-  .hdiv{display:none;}
+  .about-grid,.contact-grid{grid-template-columns:1fr;}
   nav{padding:0 20px;}
   .nav-links,.nav-cta{display:none;}
   .hamburger{display:flex;}
   .wrap{padding:70px 20px;}
-  #hero{padding:calc(var(--nav-h)+30px) 20px 50px;}
+  #hero{padding-left:20px;padding-right:20px;}
+  .hero-stats{gap:24px;}
 }
 @media(max-width:600px){
-  .hero-name{font-size:32px;}
+  .hero-name{font-size:42px;}
   .section-title{font-size:24px;}
-  .projects-grid,.skills-grid,.cert-grid,.edu-grid{grid-template-columns:1fr;}
-  .hero-card{grid-template-columns:1fr 1fr;}
+  .proj-grid,.skills-grid,.cert-grid,.edu-grid{grid-template-columns:1fr;}
 }
 </style>
 </head>
 <body>
 
+<canvas id="bg-canvas"></canvas>
+
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">TA<span>.</span>dev</div>
+  <div class="nav-logo">tahir<span>.</span>dev</div>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#experience">Experience</a></li>
-    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#certifications">Certs</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
   <a href="mailto:ee.tahirabbas@gmail.com" class="nav-cta">Hire Me</a>
@@ -200,136 +220,171 @@ footer{text-align:center;padding:28px 40px;border-top:1px solid var(--border);fo
 <!-- HERO -->
 <section id="hero">
   <div class="hero-inner">
-    <div>
-      <div class="hero-tag">Electrical Engineer & AI Developer</div>
-      <h1 class="hero-name">Tahir<br/><span>Abbas</span></h1>
-      <p class="hero-role">O&amp;M Engineer · <strong>Solar Energy</strong> · Generative AI · Embedded Systems</p>
-      <p class="hero-desc">Electrical Engineer with hands-on experience in solar plant operations, AI application development, and intelligent robotics. Building tools that bridge hardware and intelligence.</p>
-      <div class="hero-btns">
-        <a href="#projects" class="btn-primary">View Projects</a>
-        <a href="#contact" class="btn-ghost">Get in Touch</a>
-      </div>
+    <div class="hero-tag">Electrical Engineer & AI Developer</div>
+    <h1 class="hero-name">Tahir<br/><span class="neon">Abbas</span></h1>
+    <div class="hero-typed"><span id="typed-text"></span><span class="cursor"></span></div>
+    <p class="hero-desc">Building intelligent systems at the intersection of electrical engineering, renewable energy, and artificial intelligence. From solar plants to AI-powered tools — I bridge hardware and software.</p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-solid">View My Work</a>
+      <a href="#contact" class="btn-neon">Let's Talk</a>
     </div>
-    <div class="hero-card">
-      <div class="hero-stat"><div class="hs-val">3.32</div><div class="hs-lbl">CGPA — UET Lahore</div></div>
-      <div class="hdiv"></div>
-      <div class="hero-stat"><div class="hs-val">2+</div><div class="hs-lbl">Years Experience</div></div>
-      <div class="hdiv"></div>
-      <div class="hero-stat" style="margin-bottom:14px;"><div class="hs-val">5+</div><div class="hs-lbl">Projects Built</div></div>
-      <div class="hdiv"></div>
-      <div style="padding-top:4px;"><span class="status-dot"></span><span class="hero-status">Open to Opportunities</span></div>
+    <div class="hero-stats">
+      <div class="hstat"><div class="hstat-val">3.32</div><div class="hstat-lbl">CGPA · UET Lahore</div></div>
+      <div class="hstat"><div class="hstat-val">2+</div><div class="hstat-lbl">Years Experience</div></div>
+      <div class="hstat"><div class="hstat-val">6+</div><div class="hstat-lbl">Projects Built</div></div>
+      <div class="hstat">
+        <div class="status-wrap"><span class="sdot"></span><span class="stext">Available for Opportunities</span></div>
+        <div class="hstat-lbl" style="margin-top:6px;">Open to Work</div>
+      </div>
     </div>
   </div>
 </section>
 
-<div class="section-divider"></div>
+<div class="sdiv"></div>
 
 <!-- ABOUT -->
-<div class="wrap" id="about">
+<div class="wrap reveal" id="about">
   <div class="section-label">About Me</div>
-  <h2 class="section-title">Who I Am</h2>
+  <h2 class="section-title">Who I <span>Am</span></h2>
   <div class="about-grid">
     <div class="about-text">
-      <p>I'm <strong>Tahir Abbas</strong>, an Electrical Engineer from <strong>UET Lahore</strong> (Class of 2024), currently working as an <strong>O&amp;M Engineer</strong> at a tracker-based solar plant with Nizam Energy Pvt Ltd.</p>
-      <p>My work spans from maintaining solar energy systems in the field to building AI-powered tools in Python. I completed a <strong>Generative AI training program</strong> through PEC × PakAngels, where I was recognized as a Top Performer.</p>
-      <p>My Final Year Project was a <strong>Humanoid Receptionist Robot</strong> — a Raspberry Pi-based system with face recognition, voice interaction, chatbot, and navigation guidance, built entirely by my team at UET.</p>
+      <p>I'm <strong>Tahir Abbas</strong>, an Electrical Engineer from <strong>UET Lahore</strong> (Class of 2024), currently working as an <strong>O&amp;M Engineer</strong> at a tracker-based solar plant with Nizam Energy Pvt Ltd in Punjab, Pakistan.</p>
+      <p>My work spans the full spectrum — from maintaining utility-scale solar systems in the field to building and deploying AI-powered tools using Python and Generative AI. I was recognized as a <strong>Top Performer</strong> in the PEC × PakAngels GenAI training program.</p>
+      <p>My Final Year Project was a <strong>Humanoid Receptionist Robot</strong> — a Raspberry Pi system with face recognition, voice AI, chatbot, and map-based navigation, built from scratch with my team at UET.</p>
     </div>
     <div class="about-cards">
-      <div class="about-card"><div class="ac-icon">☀️</div><div><div class="ac-title">Solar O&amp;M Engineer</div><div class="ac-sub">Tracker-based solar plant · Nizam Energy Pvt Ltd · Punjab, Pakistan</div></div></div>
-      <div class="about-card"><div class="ac-icon">🤖</div><div><div class="ac-title">AI Developer</div><div class="ac-sub">Generative AI apps · Python · Gradio · Deployed on Hugging Face</div></div></div>
-      <div class="about-card"><div class="ac-icon">⚡</div><div><div class="ac-title">Embedded Systems</div><div class="ac-sub">Raspberry Pi · STM32 · IOT · PCB Design</div></div></div>
-      <div class="about-card"><div class="ac-icon">🎓</div><div><div class="ac-title">B.Sc. Electrical Engineering</div><div class="ac-sub">UET Lahore · CGPA 3.32 · 2020–2024</div></div></div>
+      <div class="acard"><div class="acard-icon">☀️</div><div><div class="acard-title">Solar O&amp;M Engineer</div><div class="acard-sub">Tracker-based solar plant · Nizam Energy Pvt Ltd · Punjab</div></div></div>
+      <div class="acard"><div class="acard-icon">🤖</div><div><div class="acard-title">AI Developer</div><div class="acard-sub">Generative AI · Gradio · Gemini API · Hugging Face</div></div></div>
+      <div class="acard"><div class="acard-icon">⚡</div><div><div class="acard-title">Embedded Systems</div><div class="acard-sub">Raspberry Pi · STM32 · IOT · PCB Design</div></div></div>
+      <div class="acard"><div class="acard-icon">🎓</div><div><div class="acard-title">B.Sc. Electrical Engineering</div><div class="acard-sub">UET Lahore · CGPA 3.32 · 2020–2024</div></div></div>
     </div>
   </div>
 </div>
 
-<div class="section-divider"></div>
+<div class="sdiv"></div>
 
 <!-- SKILLS -->
-<div class="wrap" id="skills">
+<div class="wrap reveal" id="skills">
   <div class="section-label">Technical Skills</div>
-  <h2 class="section-title">What I Work With</h2>
+  <h2 class="section-title">What I <span>Work With</span></h2>
   <div class="skills-grid">
-    <div class="skill-card"><div class="sk-header"><div class="sk-icon">💻</div><div class="sk-title">Programming Languages</div></div><div class="sk-tags"><span class="tag tag-cyan">Python</span><span class="tag tag-cyan">C++</span><span class="tag tag-dim">Assembly (Keil)</span></div></div>
-    <div class="skill-card"><div class="sk-header"><div class="sk-icon">🤖</div><div class="sk-title">AI & Machine Learning</div></div><div class="sk-tags"><span class="tag tag-purple">Generative AI</span><span class="tag tag-purple">Prompt Engineering</span><span class="tag tag-purple">OpenCV</span><span class="tag tag-purple">Scikit-learn</span><span class="tag tag-purple">Gemini API</span></div></div>
-    <div class="skill-card"><div class="sk-header"><div class="sk-icon">🚀</div><div class="sk-title">Frameworks & Deployment</div></div><div class="sk-tags"><span class="tag tag-green">Gradio</span><span class="tag tag-green">Streamlit</span><span class="tag tag-green">Hugging Face</span><span class="tag tag-green">GitHub</span></div></div>
-    <div class="skill-card"><div class="sk-header"><div class="sk-icon">⚡</div><div class="sk-title">Embedded & Hardware</div></div><div class="sk-tags"><span class="tag tag-yellow">Raspberry Pi</span><span class="tag tag-yellow">STM32</span><span class="tag tag-yellow">PCB Design</span><span class="tag tag-yellow">IOT</span><span class="tag tag-yellow">GPIO</span></div></div>
-    <div class="skill-card"><div class="sk-header"><div class="sk-icon">🛠️</div><div class="sk-title">Software & Tools</div></div><div class="sk-tags"><span class="tag tag-orange">MATLAB</span><span class="tag tag-orange">Proteus</span><span class="tag tag-orange">Multisim</span><span class="tag tag-orange">Xilinx</span><span class="tag tag-orange">AutoCAD</span><span class="tag tag-orange">GNS3</span></div></div>
-    <div class="skill-card"><div class="sk-header"><div class="sk-icon">☀️</div><div class="sk-title">Renewable Energy</div></div><div class="sk-tags"><span class="tag tag-cyan">Solar O&amp;M</span><span class="tag tag-cyan">Tracker Systems</span><span class="tag tag-dim">PVsyst</span><span class="tag tag-dim">Helioscope</span><span class="tag tag-dim">Feasibility Analysis</span></div></div>
+    <div class="scard"><div class="scard-head"><div class="scard-icon">💻</div><div class="scard-title">Programming</div></div><div class="tags"><span class="tag tc">Python</span><span class="tag tc">C++</span><span class="tag td">Assembly</span></div></div>
+    <div class="scard"><div class="scard-head"><div class="scard-icon">🤖</div><div class="scard-title">AI & Machine Learning</div></div><div class="tags"><span class="tag tp">Generative AI</span><span class="tag tp">Prompt Engineering</span><span class="tag tp">OpenCV</span><span class="tag tp">Scikit-learn</span><span class="tag tp">Gemini API</span></div></div>
+    <div class="scard"><div class="scard-head"><div class="scard-icon">🚀</div><div class="scard-title">Frameworks & Deploy</div></div><div class="tags"><span class="tag tg">Gradio</span><span class="tag tg">Streamlit</span><span class="tag tg">Hugging Face</span><span class="tag tg">GitHub</span></div></div>
+    <div class="scard"><div class="scard-head"><div class="scard-icon">⚡</div><div class="scard-title">Embedded & Hardware</div></div><div class="tags"><span class="tag ty">Raspberry Pi</span><span class="tag ty">STM32</span><span class="tag ty">PCB Design</span><span class="tag ty">IOT</span><span class="tag ty">GPIO</span></div></div>
+    <div class="scard"><div class="scard-head"><div class="scard-icon">🛠️</div><div class="scard-title">Software & Tools</div></div><div class="tags"><span class="tag to">MATLAB</span><span class="tag to">Proteus</span><span class="tag to">Multisim</span><span class="tag to">Xilinx</span><span class="tag to">AutoCAD</span><span class="tag to">GNS3</span></div></div>
+    <div class="scard"><div class="scard-head"><div class="scard-icon">☀️</div><div class="scard-title">Renewable Energy</div></div><div class="tags"><span class="tag tc">Solar O&amp;M</span><span class="tag tc">Tracker Systems</span><span class="tag td">PVsyst</span><span class="tag td">Helioscope</span></div></div>
   </div>
 </div>
 
-<div class="section-divider"></div>
+<div class="sdiv"></div>
 
 <!-- PROJECTS -->
-<div class="wrap" id="projects">
+<div class="wrap reveal" id="projects">
   <div class="section-label">Projects</div>
-  <h2 class="section-title">What I've Built</h2>
-  <div class="projects-grid">
+  <h2 class="section-title">What I've <span>Built</span></h2>
+  <div class="proj-grid">
 
-    <div class="project-card pc-cyan">
-      <div class="proj-top"><div class="proj-icon">⚡</div><div class="proj-links">
-        <a href="https://github.com/ee-tahirabbas/sld-ai-explainer" target="_blank" class="proj-link">GitHub</a>
-        <a href="https://huggingface.co/spaces/ee-tahirabbas/sld-ai-explainer" target="_blank" class="proj-link">Live ↗</a>
-      </div></div>
-      <div class="proj-title">SLD AI Explainer</div>
-      <div class="proj-desc">AI-powered Single Line Diagram analyzer. Upload any SLD and get instant component breakdown, fault diagnosis, and power flow analysis using Google Gemini.</div>
-      <div class="proj-stack"><span class="tag tag-cyan">Python</span><span class="tag tag-cyan">Gradio</span><span class="tag tag-purple">Gemini API</span><span class="tag tag-green">Hugging Face</span></div>
+    <div class="pcard">
+      <div class="pcard-img" style="background:linear-gradient(135deg,#0a1a2e,#0d2840);">
+        <div class="pcard-img-placeholder"><div class="pcard-img-icon">⚡</div><div class="pcard-img-txt">Add project screenshot here</div></div>
+        <div class="pcard-img-overlay"></div>
+      </div>
+      <div class="pcard-accent" style="background:linear-gradient(90deg,var(--neon),var(--neon2));"></div>
+      <div class="pcard-body">
+        <div class="pcard-top"><span class="pcard-badge pb-live">● Live</span><div class="pcard-links"><a href="https://github.com/ee-tahirabbas/sld-ai-explainer" target="_blank" class="plink">GitHub</a><a href="https://huggingface.co/spaces/ee-tahirabbas/sld-ai-explainer" target="_blank" class="plink">Live ↗</a></div></div>
+        <div class="pcard-title">SLD AI Explainer</div>
+        <div class="pcard-desc">AI-powered Single Line Diagram analyzer. Upload any SLD and get instant component breakdown, fault diagnosis, and power flow analysis using Google Gemini.</div>
+        <div class="pcard-stack"><span class="tag tc">Python</span><span class="tag tg">Gradio</span><span class="tag tp">Gemini API</span><span class="tag td">Hugging Face</span></div>
+      </div>
     </div>
 
-    <div class="project-card pc-yellow">
-      <div class="proj-top"><div class="proj-icon">🤖</div><div class="proj-links">
-        <a href="https://github.com/ee-tahirabbas/humanoid-robo-receptionist" target="_blank" class="proj-link">GitHub</a>
-      </div></div>
-      <div class="proj-title">Humanoid Receptionist Robot</div>
-      <div class="proj-desc">Raspberry Pi-based humanoid robot with facial recognition, voice interaction, chatbot, and indoor navigation guidance. Final Year Project — UET Lahore 2024.</div>
-      <div class="proj-stack"><span class="tag tag-yellow">Raspberry Pi</span><span class="tag tag-purple">OpenCV</span><span class="tag tag-dim">Python</span><span class="tag tag-dim">Tkinter</span></div>
+    <div class="pcard">
+      <div class="pcard-img" style="background:linear-gradient(135deg,#1a0d2e,#2a1040);">
+        <div class="pcard-img-placeholder"><div class="pcard-img-icon">🤖</div><div class="pcard-img-txt">Add robot photo here</div></div>
+        <div class="pcard-img-overlay"></div>
+      </div>
+      <div class="pcard-accent" style="background:linear-gradient(90deg,#b07aff,#ff6b2b);"></div>
+      <div class="pcard-body">
+        <div class="pcard-top"><span class="pcard-badge pb-fyp">★ FYP 2024</span><div class="pcard-links"><a href="https://github.com/ee-tahirabbas/humanoid-robo-receptionist" target="_blank" class="plink">GitHub</a></div></div>
+        <div class="pcard-title">Humanoid Receptionist Robot</div>
+        <div class="pcard-desc">Raspberry Pi-based humanoid with facial recognition, voice AI, chatbot, and indoor navigation. Built at UET Lahore as Final Year Project 2024.</div>
+        <div class="pcard-stack"><span class="tag ty">Raspberry Pi</span><span class="tag tp">OpenCV</span><span class="tag td">Python</span><span class="tag td">Tkinter</span></div>
+      </div>
     </div>
 
-    <div class="project-card pc-green">
-      <div class="proj-top"><div class="proj-icon">💡</div><div class="proj-links"></div></div>
-      <div class="proj-title">Disco LED Cube (STM32)</div>
-      <div class="proj-desc">Programmable 3D LED cube controlled by STM32 microcontroller with custom animation patterns and GPIO control via Assembly and C.</div>
-      <div class="proj-stack"><span class="tag tag-yellow">STM32</span><span class="tag tag-dim">Assembly</span><span class="tag tag-dim">C++</span><span class="tag tag-orange">Keil uVision</span></div>
+    <div class="pcard">
+      <div class="pcard-img" style="background:linear-gradient(135deg,#0a2010,#0d3018);">
+        <div class="pcard-img-placeholder"><div class="pcard-img-icon">💡</div><div class="pcard-img-txt">Add project photo here</div></div>
+        <div class="pcard-img-overlay"></div>
+      </div>
+      <div class="pcard-accent" style="background:linear-gradient(90deg,var(--green),var(--neon));"></div>
+      <div class="pcard-body">
+        <div class="pcard-top"><span class="pcard-badge pb-dev">Academic</span><div class="pcard-links"></div></div>
+        <div class="pcard-title">Disco LED Cube (STM32)</div>
+        <div class="pcard-desc">Programmable 3D LED cube controlled by STM32 with custom animation patterns and GPIO control via Assembly and C++.</div>
+        <div class="pcard-stack"><span class="tag ty">STM32</span><span class="tag td">Assembly</span><span class="tag td">C++</span><span class="tag to">Keil uVision</span></div>
+      </div>
     </div>
 
-    <div class="project-card pc-purple">
-      <div class="proj-top"><div class="proj-icon">🏠</div><div class="proj-links"></div></div>
-      <div class="proj-title">Home Automation System</div>
-      <div class="proj-desc">IoT-based home automation for remote control of appliances via mobile interface with embedded microcontroller and wireless communication.</div>
-      <div class="proj-stack"><span class="tag tag-yellow">IOT</span><span class="tag tag-cyan">Embedded C</span><span class="tag tag-dim">Proteus</span></div>
+    <div class="pcard">
+      <div class="pcard-img" style="background:linear-gradient(135deg,#1a100a,#2a1a0d);">
+        <div class="pcard-img-placeholder"><div class="pcard-img-icon">🏠</div><div class="pcard-img-txt">Add project photo here</div></div>
+        <div class="pcard-img-overlay"></div>
+      </div>
+      <div class="pcard-accent" style="background:linear-gradient(90deg,var(--orange),var(--yellow));"></div>
+      <div class="pcard-body">
+        <div class="pcard-top"><span class="pcard-badge pb-dev">Academic</span><div class="pcard-links"></div></div>
+        <div class="pcard-title">Home Automation System</div>
+        <div class="pcard-desc">IoT-based home automation for remote appliance control via mobile interface with embedded microcontroller and wireless comms.</div>
+        <div class="pcard-stack"><span class="tag ty">IOT</span><span class="tag tc">Embedded C</span><span class="tag to">Proteus</span></div>
+      </div>
     </div>
 
-    <div class="project-card pc-cyan">
-      <div class="proj-top"><div class="proj-icon">🦯</div><div class="proj-links"></div></div>
-      <div class="proj-title">Smart Blind Stick</div>
-      <div class="proj-desc">Assistive device for visually impaired users with ultrasonic obstacle detection, vibration feedback, and audio alerts for real-time navigation.</div>
-      <div class="proj-stack"><span class="tag tag-yellow">Ultrasonic Sensor</span><span class="tag tag-dim">Embedded C</span><span class="tag tag-orange">PCB Design</span></div>
+    <div class="pcard">
+      <div class="pcard-img" style="background:linear-gradient(135deg,#0a0d1a,#101528);">
+        <div class="pcard-img-placeholder"><div class="pcard-img-icon">🦯</div><div class="pcard-img-txt">Add project photo here</div></div>
+        <div class="pcard-img-overlay"></div>
+      </div>
+      <div class="pcard-accent" style="background:linear-gradient(90deg,var(--neon),var(--green));"></div>
+      <div class="pcard-body">
+        <div class="pcard-top"><span class="pcard-badge pb-dev">Academic</span><div class="pcard-links"></div></div>
+        <div class="pcard-title">Smart Blind Stick</div>
+        <div class="pcard-desc">Assistive device with ultrasonic obstacle detection, vibration feedback, and audio alerts for visually impaired users.</div>
+        <div class="pcard-stack"><span class="tag ty">Ultrasonic</span><span class="tag td">Embedded C</span><span class="tag to">PCB Design</span></div>
+      </div>
     </div>
 
-    <div class="project-card pc-green">
-      <div class="proj-top"><div class="proj-icon">🚒</div><div class="proj-links"></div></div>
-      <div class="proj-title">Firefighting Robotic Car</div>
-      <div class="proj-desc">Autonomous robot that detects and extinguishes fires using flame sensors and water pump, with obstacle avoidance and manual override.</div>
-      <div class="proj-stack"><span class="tag tag-yellow">Arduino</span><span class="tag tag-dim">Sensors</span><span class="tag tag-dim">Motor Driver</span></div>
+    <div class="pcard">
+      <div class="pcard-img" style="background:linear-gradient(135deg,#1a0808,#2a1010);">
+        <div class="pcard-img-placeholder"><div class="pcard-img-icon">🚒</div><div class="pcard-img-txt">Add project photo here</div></div>
+        <div class="pcard-img-overlay"></div>
+      </div>
+      <div class="pcard-accent" style="background:linear-gradient(90deg,#ff4444,var(--orange));"></div>
+      <div class="pcard-body">
+        <div class="pcard-top"><span class="pcard-badge pb-dev">Academic</span><div class="pcard-links"></div></div>
+        <div class="pcard-title">Firefighting Robotic Car</div>
+        <div class="pcard-desc">Autonomous robot detecting and extinguishing fires using flame sensors and water pump, with obstacle avoidance and manual override.</div>
+        <div class="pcard-stack"><span class="tag ty">Arduino</span><span class="tag td">Flame Sensor</span><span class="tag td">Motor Driver</span></div>
+      </div>
     </div>
 
   </div>
 </div>
 
-<div class="section-divider"></div>
+<div class="sdiv"></div>
 
 <!-- EXPERIENCE -->
-<div class="wrap" id="experience">
+<div class="wrap reveal" id="experience">
   <div class="section-label">Experience</div>
-  <h2 class="section-title">Where I've Worked</h2>
+  <h2 class="section-title">Where I've <span>Worked</span></h2>
   <div class="timeline">
 
     <div class="tl-item"><div class="tl-dot"></div>
       <div class="tl-card">
         <div class="tl-top"><div class="tl-role">O&amp;M Engineer</div><div class="tl-period">2024 — Present</div></div>
-        <div class="tl-company">Nizam Energy Pvt Ltd · Tracker-Based Solar Plant · Punjab, Pakistan</div>
-        <ul class="tl-points">
+        <div class="tl-co">Nizam Energy Pvt Ltd · Tracker-Based Solar Plant · Punjab, Pakistan</div>
+        <ul class="tl-pts">
           <li>Operation & maintenance of a tracker-based utility-scale solar plant</li>
           <li>Monitoring plant performance, inverter health, and tracker alignment</li>
           <li>Fault diagnosis, preventive maintenance, and performance optimization</li>
@@ -341,12 +396,12 @@ footer{text-align:center;padding:28px 40px;border-top:1px solid var(--border);fo
     <div class="tl-item"><div class="tl-dot"></div>
       <div class="tl-card">
         <div class="tl-top"><div class="tl-role">Generative AI Application Developer</div><div class="tl-period">2024</div></div>
-        <div class="tl-company">PEC × PakAngels · iCode Guru · Aspire Pakistan</div>
-        <ul class="tl-points">
+        <div class="tl-co">PEC × PakAngels · iCode Guru · Aspire Pakistan</div>
+        <ul class="tl-pts">
           <li>Recognized as Top Performer in the GenAI training cohort</li>
-          <li>Built and deployed AI-powered tools using Python, Gradio, and LLM APIs</li>
+          <li>Built and deployed AI tools using Python, Gradio, and LLM APIs</li>
           <li>Expertise in prompt engineering and generative AI model integration</li>
-          <li>Deployed applications on Hugging Face Spaces</li>
+          <li>Deployed applications live on Hugging Face Spaces</li>
         </ul>
       </div>
     </div>
@@ -354,9 +409,9 @@ footer{text-align:center;padding:28px 40px;border-top:1px solid var(--border);fo
     <div class="tl-item"><div class="tl-dot"></div>
       <div class="tl-card">
         <div class="tl-top"><div class="tl-role">Intern — Sales & Marketing PD</div><div class="tl-period">Dec 2024 – Jan 2025</div></div>
-        <div class="tl-company">PEL (Pak Elektron Limited) · Lahore</div>
-        <ul class="tl-points">
-          <li>Exposure to product development in the electrical equipment industry</li>
+        <div class="tl-co">PEL (Pak Elektron Limited) · Lahore</div>
+        <ul class="tl-pts">
+          <li>Product development exposure in the electrical equipment industry</li>
           <li>Visited manufacturing facilities for energy meters and power transformers</li>
         </ul>
       </div>
@@ -365,8 +420,8 @@ footer{text-align:center;padding:28px 40px;border-top:1px solid var(--border);fo
     <div class="tl-item"><div class="tl-dot"></div>
       <div class="tl-card">
         <div class="tl-top"><div class="tl-role">Industrial Visit</div><div class="tl-period">Jul – Aug 2023</div></div>
-        <div class="tl-company">Electrical Energy Meter & Transformer Production Facilities</div>
-        <ul class="tl-points">
+        <div class="tl-co">Electrical Energy Meter & Transformer Production Facilities</div>
+        <ul class="tl-pts">
           <li>Hands-on exposure to production of electrical energy meters</li>
           <li>Observed manufacturing of power and distribution transformers</li>
         </ul>
@@ -376,77 +431,122 @@ footer{text-align:center;padding:28px 40px;border-top:1px solid var(--border);fo
   </div>
 </div>
 
-<div class="section-divider"></div>
+<div class="sdiv"></div>
 
-<!-- CERTIFICATIONS + EDUCATION -->
-<div class="wrap" id="certifications">
+<!-- CERTIFICATIONS -->
+<div class="wrap reveal" id="certifications">
   <div class="section-label">Certifications & Training</div>
-  <h2 class="section-title">Credentials</h2>
+  <h2 class="section-title">My <span>Credentials</span></h2>
   <div class="cert-grid">
-    <div class="cert-card"><div class="cert-icon">🏆</div><div><div class="cert-title">Generative AI Application Developer</div><div class="cert-org">PEC × PakAngels · iCode Guru</div><div class="cert-year">2024 · Top Performer</div></div></div>
-    <div class="cert-card"><div class="cert-icon">🎓</div><div><div class="cert-title">Industrial Automation & Process Optimization</div><div class="cert-org">Pakistan Engineering Council (PEC)</div><div class="cert-year">2024</div></div></div>
-    <div class="cert-card"><div class="cert-icon">☀️</div><div><div class="cert-title">Renewable Energy Feasibility Analysis</div><div class="cert-org">Professional Training</div><div class="cert-year">2024</div></div></div>
-    <div class="cert-card"><div class="cert-icon">🤖</div><div><div class="cert-title">Robotics & Intelligent Systems</div><div class="cert-org">UET Lahore — Academic Project</div><div class="cert-year">2020 – 2024</div></div></div>
+    <div class="cert-card"><div class="cert-icon" style="background:rgba(255,214,10,.08);border-color:rgba(255,214,10,.2);">🏆</div><div><div class="cert-title">Generative AI Application Developer</div><div class="cert-org">PEC × PakAngels · iCode Guru</div><div class="cert-yr">2024 · Top Performer</div></div></div>
+    <div class="cert-card"><div class="cert-icon" style="background:rgba(0,200,255,.08);border-color:rgba(0,200,255,.2);">⚙️</div><div><div class="cert-title">Industrial Automation & Process Optimization</div><div class="cert-org">Pakistan Engineering Council (PEC)</div><div class="cert-yr">2024</div></div></div>
+    <div class="cert-card"><div class="cert-icon" style="background:rgba(0,255,170,.08);border-color:rgba(0,255,170,.2);">☀️</div><div><div class="cert-title">Renewable Energy Feasibility Analysis</div><div class="cert-org">Professional Training</div><div class="cert-yr">2024</div></div></div>
+    <div class="cert-card"><div class="cert-icon" style="background:rgba(176,122,255,.08);border-color:rgba(176,122,255,.2);">🤖</div><div><div class="cert-title">Robotics & Intelligent Systems</div><div class="cert-org">UET Lahore — Academic</div><div class="cert-yr">2020–2024</div></div></div>
   </div>
 
   <div style="margin-top:48px;">
     <div class="section-label">Education</div>
     <div class="edu-grid">
-      <div class="edu-card"><div class="edu-deg">B.Sc. Electrical Engineering</div><div class="edu-uni">University of Engineering & Technology, Lahore</div><div class="edu-row"><span>CGPA</span><span>3.32 / 4.0</span></div><div class="edu-row"><span>Year</span><span>2020 – 2024</span></div></div>
-      <div class="edu-card"><div class="edu-deg">FSc Pre-Engineering</div><div class="edu-uni">Govt. College for Boys, Gulberg, Lahore</div><div class="edu-row"><span>Percentage</span><span>83.4%</span></div><div class="edu-row"><span>Year</span><span>2018 – 2020</span></div></div>
-      <div class="edu-card"><div class="edu-deg">Matriculation (Science)</div><div class="edu-uni">Govt. High School Shori Maneka, Hafizabad</div><div class="edu-row"><span>Percentage</span><span>83.9%</span></div><div class="edu-row"><span>Year</span><span>2016 – 2018</span></div></div>
+      <div class="edu-card"><div class="edu-deg">B.Sc. Electrical Engineering</div><div class="edu-uni">University of Engineering & Technology, Lahore</div><div class="edu-row"><span>CGPA</span><span>3.32 / 4.0</span></div><div class="edu-row"><span>Year</span><span>2020–2024</span></div></div>
+      <div class="edu-card"><div class="edu-deg">FSc Pre-Engineering</div><div class="edu-uni">Govt. College for Boys, Gulberg, Lahore</div><div class="edu-row"><span>Percentage</span><span>83.4%</span></div><div class="edu-row"><span>Year</span><span>2018–2020</span></div></div>
+      <div class="edu-card"><div class="edu-deg">Matriculation (Science)</div><div class="edu-uni">Govt. High School Shori Maneka, Hafizabad</div><div class="edu-row"><span>Percentage</span><span>83.9%</span></div><div class="edu-row"><span>Year</span><span>2016–2018</span></div></div>
     </div>
   </div>
 </div>
 
-<div class="section-divider"></div>
+<div class="sdiv"></div>
 
 <!-- CONTACT -->
-<div class="wrap" id="contact">
+<div class="wrap reveal" id="contact">
   <div class="section-label">Contact</div>
-  <h2 class="section-title">Let's Connect</h2>
+  <h2 class="section-title">Let's <span>Connect</span></h2>
   <div class="contact-grid">
-    <div class="contact-info">
-      <a href="mailto:ee.tahirabbas@gmail.com" class="contact-item"><div class="ci-icon">📧</div><div><div class="ci-label">Email</div><div class="ci-val">ee.tahirabbas@gmail.com</div></div></a>
-      <a href="tel:+923240654306" class="contact-item"><div class="ci-icon">📞</div><div><div class="ci-label">Phone</div><div class="ci-val">+92 324 0654306</div></div></a>
-      <a href="https://github.com/ee-tahirabbas" target="_blank" class="contact-item"><div class="ci-icon">💻</div><div><div class="ci-label">GitHub</div><div class="ci-val">github.com/ee-tahirabbas</div></div></a>
-      <a href="#" class="contact-item" id="linkedin-link"><div class="ci-icon">🔗</div><div><div class="ci-label">LinkedIn</div><div class="ci-val">Add your LinkedIn URL</div></div></a>
-      <div class="contact-item" style="cursor:default;"><div class="ci-icon">📍</div><div><div class="ci-label">Location</div><div class="ci-val">Township, Lahore, Pakistan</div></div></div>
+    <div class="cinfo">
+      <a href="mailto:ee.tahirabbas@gmail.com" class="citem"><div class="citem-icon">📧</div><div><div class="ci-lbl">Email</div><div class="ci-val">ee.tahirabbas@gmail.com</div></div></a>
+      <a href="tel:+923240654306" class="citem"><div class="citem-icon">📞</div><div><div class="ci-lbl">Phone</div><div class="ci-val">+92 324 0654306</div></div></a>
+      <a href="https://github.com/ee-tahirabbas" target="_blank" class="citem"><div class="citem-icon">💻</div><div><div class="ci-lbl">GitHub</div><div class="ci-val">github.com/ee-tahirabbas</div></div></a>
+      <a href="#" class="citem" id="li-link"><div class="citem-icon">🔗</div><div><div class="ci-lbl">LinkedIn</div><div class="ci-val">Add your LinkedIn URL</div></div></a>
+      <div class="citem" style="cursor:default;"><div class="citem-icon">📍</div><div><div class="ci-lbl">Location</div><div class="ci-val">Township, Lahore, Pakistan</div></div></div>
     </div>
-    <div class="contact-note">
+    <div class="cnote">
       <div class="cn-title">Open to Opportunities</div>
-      <div class="cn-text">I'm currently working as an O&M Engineer and actively looking for roles in renewable energy, AI development, embedded systems, or electrical engineering. Feel free to reach out for collaborations, job opportunities, or just to connect.</div>
-      <div class="cn-available"><span class="status-dot"></span>Available for freelance & full-time roles</div>
-      <a href="mailto:ee.tahirabbas@gmail.com" class="btn-primary" style="display:inline-block;">Send Message</a>
+      <div class="cn-text">Currently working as an O&M Engineer and actively looking for roles in renewable energy, AI development, embedded systems, or electrical engineering. Open to collaborations and freelance work too.</div>
+      <div class="cn-avail"><span class="sdot"></span>Available for freelance & full-time roles</div>
+      <a href="mailto:ee.tahirabbas@gmail.com" class="btn-solid" style="display:inline-block;">Send Message</a>
     </div>
   </div>
 </div>
 
 <footer>
-  <p>Designed & built by <span style="color:var(--cyan);">Tahir Abbas</span> &nbsp;·&nbsp; Electrical Engineer &nbsp;·&nbsp; Lahore, Pakistan</p>
+  <p>Built by <span>Tahir Abbas</span> &nbsp;·&nbsp; Electrical Engineer &nbsp;·&nbsp; Lahore, Pakistan</p>
 </footer>
 
 <script>
-// Mobile nav
-let menuOpen = false;
-function toggleMenu(){
-  const links = document.querySelector('.nav-links');
-  menuOpen = !menuOpen;
-  links.style.cssText = menuOpen
-    ? 'display:flex;flex-direction:column;position:fixed;top:60px;left:0;right:0;background:rgba(13,31,51,0.98);padding:20px 24px;border-bottom:1px solid rgba(60,140,220,0.18);gap:16px;z-index:99;'
-    : '';
+// ── PARTICLE CANVAS ──
+const canvas = document.getElementById('bg-canvas');
+const ctx = canvas.getContext('2d');
+let W, H, particles = [];
+function resize(){ W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+resize();
+window.addEventListener('resize', resize);
+class Particle {
+  constructor(){ this.reset(); }
+  reset(){
+    this.x = Math.random()*W; this.y = Math.random()*H;
+    this.vx = (Math.random()-.5)*.3; this.vy = (Math.random()-.5)*.3;
+    this.size = Math.random()*1.5+.3; this.alpha = Math.random()*.6+.1;
+  }
+  update(){ this.x+=this.vx; this.y+=this.vy; if(this.x<0||this.x>W||this.y<0||this.y>H) this.reset(); }
+  draw(){ ctx.beginPath(); ctx.arc(this.x,this.y,this.size,0,Math.PI*2); ctx.fillStyle=`rgba(0,200,255,${this.alpha})`; ctx.fill(); }
 }
-// Close menu on link click
+for(let i=0;i<120;i++) particles.push(new Particle());
+function connectParticles(){
+  for(let i=0;i<particles.length;i++){
+    for(let j=i+1;j<particles.length;j++){
+      const dx=particles[i].x-particles[j].x, dy=particles[i].y-particles[j].y;
+      const d=Math.sqrt(dx*dx+dy*dy);
+      if(d<120){ ctx.beginPath(); ctx.moveTo(particles[i].x,particles[i].y); ctx.lineTo(particles[j].x,particles[j].y); ctx.strokeStyle=`rgba(0,200,255,${.15*(1-d/120)})`; ctx.lineWidth=.5; ctx.stroke(); }
+    }
+  }
+}
+function animate(){ ctx.clearRect(0,0,W,H); particles.forEach(p=>{p.update();p.draw();}); connectParticles(); requestAnimationFrame(animate); }
+animate();
+
+// ── TYPING EFFECT ──
+const phrases = ['O&M Engineer @ Solar Plant','Generative AI Developer','Embedded Systems Engineer','Humanoid Robot Builder','Open to Opportunities ⚡'];
+let pi=0, ci=0, deleting=false, el=document.getElementById('typed-text');
+function type(){
+  const phrase=phrases[pi];
+  if(!deleting){ el.textContent=phrase.substring(0,ci+1); ci++; if(ci===phrase.length){ deleting=true; setTimeout(type,2000); return; } }
+  else{ el.textContent=phrase.substring(0,ci-1); ci--; if(ci===0){ deleting=false; pi=(pi+1)%phrases.length; } }
+  setTimeout(type, deleting?40:80);
+}
+type();
+
+// ── SCROLL REVEAL ──
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// ── MOBILE NAV ──
+let menuOpen=false;
+function toggleMenu(){
+  menuOpen=!menuOpen;
+  const links=document.querySelector('.nav-links');
+  links.style.cssText=menuOpen?'display:flex;flex-direction:column;position:fixed;top:64px;left:0;right:0;background:rgba(8,13,20,0.98);padding:24px;border-bottom:1px solid rgba(0,200,255,0.1);gap:18px;z-index:99;':'';
+}
 document.querySelectorAll('.nav-links a').forEach(a=>{
-  a.addEventListener('click',()=>{menuOpen=false;document.querySelector('.nav-links').style.cssText='';});
+  a.addEventListener('click',()=>{ menuOpen=false; document.querySelector('.nav-links').style.cssText=''; });
 });
-// Active nav highlight
-const secs = document.querySelectorAll('[id]');
-const navAs = document.querySelectorAll('.nav-links a');
+
+// ── ACTIVE NAV ──
+const secs=document.querySelectorAll('[id]');
+const navAs=document.querySelectorAll('.nav-links a');
 window.addEventListener('scroll',()=>{
   let cur='';
-  secs.forEach(s=>{if(window.scrollY>=s.offsetTop-90)cur=s.id;});
-  navAs.forEach(a=>{a.style.color=a.getAttribute('href')==='#'+cur?'var(--cyan)':'';});
+  secs.forEach(s=>{ if(window.scrollY>=s.offsetTop-90) cur=s.id; });
+  navAs.forEach(a=>{ a.style.color=a.getAttribute('href')==='#'+cur?'var(--neon)':''; });
 },{passive:true});
 </script>
 </body>
