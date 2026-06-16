@@ -192,7 +192,7 @@ nav{
 .td{color:var(--textmid);border-color:rgba(157,205,212,0.15);background:rgba(157,205,212,0.04);}
 
 /* ══ PROJECTS ══ */
-.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:24px;}
+.proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
 .pcard{border-radius:16px;overflow:hidden;transition:all .35s;display:flex;flex-direction:column;}
 .pcard:hover{transform:translateY(-8px);box-shadow:0 28px 70px rgba(0,0,0,0.5),0 0 0 1px rgba(18,178,193,0.25);}
 .pcard-img{height:200px;position:relative;overflow:hidden;}
@@ -217,7 +217,10 @@ nav{
   font-family:'JetBrains Mono',monospace;font-size:11px;
   font-weight:600;letter-spacing:.1em;
   background:rgba(26,36,40,0.8);backdrop-filter:blur(8px);
+  text-decoration:none;display:inline-block;cursor:pointer;
+  transition:all .2s;pointer-events:all;
 }
+.view-btn:hover{background:var(--neon);color:var(--bg);border-color:var(--neon);}
 .pcard-accent{height:2px;}
 .pcard-body{padding:20px;flex:1;display:flex;flex-direction:column;}
 .pcard-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
@@ -355,7 +358,7 @@ footer span{color:var(--neon);}
     <li><a href="#certifications">Certs</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <a href="mailto:ee.tahirabbas@gmail.com" class="nav-cta">Hire Me</a>
+  <a href="mailto:ee.tahirabbas@gmail.com?subject=Hiring Inquiry — Tahir Abbas" class="nav-cta" style="text-decoration:none;">Hire Me</a>
   <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
 </nav>
 
@@ -626,7 +629,7 @@ footer span{color:var(--neon);}
       <div class="cn-title">Open to Opportunities</div>
       <div class="cn-text">Currently working as an O&amp;M Engineer and actively looking for roles in renewable energy, AI development, embedded systems, or electrical engineering. Open to collaborations and freelance too.</div>
       <div class="cn-avail"><span class="sdot"></span>Available for freelance & full-time roles</div>
-      <a href="mailto:ee.tahirabbas@gmail.com" class="btn-solid">Send Message</a>
+      <a href="mailto:ee.tahirabbas@gmail.com?subject=Hiring Inquiry — Tahir Abbas&body=Hi Tahir," class="btn-solid" style="text-decoration:none;">Send Message ↗</a>
     </div>
   </div>
 </div>
@@ -813,6 +816,71 @@ function toggleMenu(){
   l.style.cssText=mo?'display:flex;flex-direction:column;position:fixed;top:64px;left:0;right:0;background:rgba(26,36,40,0.97);backdrop-filter:blur(20px);padding:24px;border-bottom:1px solid rgba(18,178,193,0.1);gap:18px;z-index:99;':'';
 }
 document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>{mo=false;document.querySelector('.nav-links').style.cssText='';}));
+</script>
+
+<!-- PROJECT MODAL -->
+<div id="proj-modal" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(10,18,22,0.92);backdrop-filter:blur(12px);align-items:center;justify-content:center;">
+  <div style="max-width:600px;width:90%;border-radius:20px;overflow:hidden;position:relative;" class="glass">
+    <button onclick="closeModal()" style="position:absolute;top:14px;right:18px;background:none;border:none;color:var(--textmid);font-size:22px;cursor:pointer;z-index:2;line-height:1;">✕</button>
+    <div id="modal-img-wrap" style="height:280px;overflow:hidden;">
+      <img id="modal-img" src="" alt="" style="width:100%;height:100%;object-fit:cover;"/>
+    </div>
+    <div style="padding:24px;">
+      <div id="modal-badge" style="margin-bottom:10px;"></div>
+      <div id="modal-title" style="font-size:20px;font-weight:700;color:var(--text);margin-bottom:10px;"></div>
+      <div id="modal-desc" style="font-size:14px;color:var(--textdim);line-height:1.8;margin-bottom:18px;"></div>
+      <div id="modal-stack" style="display:flex;flex-wrap:wrap;gap:7px;"></div>
+    </div>
+  </div>
+</div>
+<script>
+// ══ PROJECT MODAL ══
+const projectData = {
+  'project-led.png':{
+    title:'Disco LED Cube (STM32)',
+    badge:'<span class="pbadge pb-dev">Academic Project</span>',
+    desc:'A programmable 3D LED cube built using STM32 microcontroller. Custom animation patterns were coded in Assembly and C++, with full GPIO control for light sequencing. Demonstrated real-time embedded control and digital logic design.',
+    stack:'<span class="tag tc">STM32</span><span class="tag td">Assembly</span><span class="tag td">C++</span><span class="tag to">Keil uVision</span><span class="tag ty">GPIO</span>'
+  },
+  'project-home.png':{
+    title:'Home Automation System',
+    badge:'<span class="pbadge pb-dev">Academic Project</span>',
+    desc:'IoT-based home automation system for remote control of household appliances via a mobile interface. Built with embedded microcontroller, wireless communication module, and relay switching circuit. Simulated and tested in Proteus.',
+    stack:'<span class="tag ty">IOT</span><span class="tag tc">Embedded C</span><span class="tag to">Proteus</span><span class="tag td">Relay Circuit</span>'
+  },
+  'project-stick.png':{
+    title:'Smart Blind Stick',
+    badge:'<span class="pbadge pb-dev">Academic Project</span>',
+    desc:'An assistive device designed for visually impaired users. Uses an HC-SR04 ultrasonic sensor for obstacle detection, triggering vibration motor feedback and audio alerts. Custom PCB designed for compact integration.',
+    stack:'<span class="tag ty">Ultrasonic Sensor</span><span class="tag td">Embedded C</span><span class="tag to">PCB Design</span><span class="tag td">Vibration Motor</span>'
+  },
+  'project-fire.png':{
+    title:'Firefighting Robotic Car',
+    badge:'<span class="pbadge pb-dev">Academic Project</span>',
+    desc:'An autonomous robot that detects and extinguishes fires using flame sensors and a water pump. Features obstacle avoidance using IR sensors, motor driver control, and a manual override mode. Built on Arduino platform.',
+    stack:'<span class="tag ty">Arduino</span><span class="tag td">Flame Sensor</span><span class="tag td">Motor Driver</span><span class="tag to">IR Sensors</span>'
+  }
+};
+function openModal(img,name){
+  const d=projectData[img];if(!d)return;
+  document.getElementById('modal-img').src=img;
+  document.getElementById('modal-img').alt=name;
+  document.getElementById('modal-title').textContent=d.title;
+  document.getElementById('modal-badge').innerHTML=d.badge;
+  document.getElementById('modal-desc').textContent=d.desc;
+  document.getElementById('modal-stack').innerHTML=d.stack;
+  const m=document.getElementById('proj-modal');
+  m.style.display='flex';
+  setTimeout(()=>m.style.opacity='1',10);
+}
+function closeModal(){
+  const m=document.getElementById('proj-modal');
+  m.style.display='none';
+}
+document.getElementById('proj-modal').addEventListener('click',function(e){
+  if(e.target===this) closeModal();
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
 </script>
 </body>
 </html>
