@@ -15,14 +15,15 @@ a{text-decoration:none;color:inherit;}
 ::-webkit-scrollbar-thumb{background:#4f8ef7;border-radius:2px;}
 
 :root{
-  --blue:#4f8ef7;--cyan:#0dd3c5;--gold:#f59e0b;
+  --blue:#5b8cff;--cyan:#22d3ee;--gold:#fbbf24;--pink:#ec4899;
   --bg:#0a0e1a;--bg2:#0d1526;--bg3:#111c35;
-  --t1:#e8f0ff;--t2:#8da4c8;--t3:#4a607a;
-  --glow-b:rgba(79,142,247,0.2);--glow-c:rgba(13,211,197,0.2);
+  --t1:#eef3ff;--t2:#9bb0d4;--t3:#5c75a0;
+  --glow-b:rgba(91,140,255,0.25);--glow-c:rgba(34,211,238,0.2);
 }
 
 /* ── PROGRESS ── */
-#prog{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--cyan),var(--gold));z-index:500;width:0;}
+#prog{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--pink),var(--gold));z-index:500;width:0;}
+#bg-canvas{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;}
 
 /* ── NAV ── */
 nav{
@@ -99,24 +100,25 @@ nav{
 
 /* RIGHT — Photo */
 .photo-wrap{position:relative;display:flex;align-items:center;justify-content:center;}
+.photo-wrap::before{
+  content:'';position:absolute;width:140%;height:140%;
+  background:radial-gradient(circle,rgba(91,140,255,0.35) 0%,rgba(236,72,153,0.18) 40%,transparent 70%);
+  filter:blur(20px);z-index:0;animation:glowmove 6s ease-in-out infinite alternate;
+}
+@keyframes glowmove{0%{transform:scale(1) rotate(0deg);opacity:.8;}100%{transform:scale(1.15) rotate(8deg);opacity:1;}}
 /* Glow rings canvas */
-#ring-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;}
-.photo-inner{position:relative;z-index:1;width:340px;}
+#ring-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;}
+.photo-inner{position:relative;z-index:2;width:340px;}
 .photo-img{
-  width:100%;border-radius:24px;
+  width:100%;
   object-fit:cover;object-position:top center;
   display:block;
-  border:1px solid rgba(79,142,247,0.2);
-  box-shadow:0 0 60px rgba(79,142,247,0.12),0 40px 80px rgba(0,0,0,.7);
+  filter:drop-shadow(0 30px 60px rgba(0,0,0,.6));
   animation:kb 12s ease-in-out infinite alternate;
 }
 @keyframes kb{0%{transform:scale(1);}100%{transform:scale(1.04);}}
-.photo-grad{
-  position:absolute;bottom:0;left:0;right:0;height:50%;
-  background:linear-gradient(transparent,rgba(10,14,26,.95));
-  border-radius:0 0 24px 24px;pointer-events:none;
-}
-.photo-info{position:absolute;bottom:20px;left:20px;right:20px;z-index:2;}
+.photo-grad{display:none;}
+.photo-info{position:absolute;bottom:0;left:0;right:0;padding:20px;z-index:2;background:linear-gradient(transparent,rgba(10,14,26,.9) 60%);}
 .photo-name{font-size:17px;font-weight:700;color:#fff;margin-bottom:3px;}
 .photo-role{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--cyan);letter-spacing:.1em;}
 /* Available badge */
@@ -339,6 +341,7 @@ footer b{color:var(--blue);font-weight:500;}
 </style>
 </head>
 <body>
+<canvas id="bg-canvas"></canvas>
 <div id="prog"></div>
 
 <!-- SIDE DOTS -->
@@ -363,7 +366,7 @@ footer b{color:var(--blue);font-weight:500;}
     <li><a href="#certifications">Certs</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <a href="mailto:ee.tahirabbas@gmail.com?subject=Hiring%20Inquiry%20%E2%80%94%20Tahir%20Abbas" class="nav-cta">Hire Me</a>
+  <a href="https://mail.google.com/mail/?view=cm&fs=1&to=ee.tahirabbas@gmail.com&su=Hiring%20Inquiry%20%E2%80%94%20Tahir%20Abbas" target="_blank" class="nav-cta">Hire Me</a>
   <div class="hbg" onclick="togMob()"><span></span><span></span><span></span></div>
 </nav>
 
@@ -385,7 +388,7 @@ footer b{color:var(--blue);font-weight:500;}
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           View My Work
         </a>
-        <a href="mailto:ee.tahirabbas@gmail.com?subject=Hiring%20Inquiry%20%E2%80%94%20Tahir%20Abbas" class="hbtn hbtn-sec">
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=ee.tahirabbas@gmail.com&su=Hiring%20Inquiry%20%E2%80%94%20Tahir%20Abbas" target="_blank" class="hbtn hbtn-sec">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           Get in Touch
         </a>
@@ -400,7 +403,7 @@ footer b{color:var(--blue);font-weight:500;}
             <a href="#" id="li-hero" class="soc-link" title="LinkedIn">
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
             </a>
-            <a href="mailto:ee.tahirabbas@gmail.com" class="soc-link" title="Email">
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=ee.tahirabbas@gmail.com" target="_blank" class="soc-link" title="Email">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             </a>
           </div>
@@ -682,17 +685,16 @@ footer b{color:var(--blue);font-weight:500;}
   <h2 class="st rv">Let's <span>Connect</span></h2>
   <div class="cg">
     <div class="ci-list stg">
-      <a href="mailto:ee.tahirabbas@gmail.com?subject=Hiring%20Inquiry%20%E2%80%94%20Tahir%20Abbas" class="ci"><div class="ci-ico">📧</div><div><div class="ci-l">Email</div><div class="ci-v">ee.tahirabbas@gmail.com</div></div></a>
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=ee.tahirabbas@gmail.com&su=Hiring%20Inquiry%20%E2%80%94%20Tahir%20Abbas" target="_blank" class="ci"><div class="ci-ico">📧</div><div><div class="ci-l">Email</div><div class="ci-v">ee.tahirabbas@gmail.com</div></div></a>
       <a href="tel:+923240654306" class="ci"><div class="ci-ico">📞</div><div><div class="ci-l">Phone</div><div class="ci-v">+92 324 0654306</div></div></a>
-      <a href="https://github.com/ee-tahirabbas" target="_blank" class="ci"><div class="ci-ico">💻</div><div><div class="ci-l">GitHub</div><div class="ci-v">github.com/ee-tahirabbas</div></div></a>
-      <a href="#" id="li-contact" class="ci"><div class="ci-ico">🔗</div><div><div class="ci-l">LinkedIn</div><div class="ci-v">Update your LinkedIn URL here</div></div></a>
       <div class="ci" style="cursor:default;"><div class="ci-ico">📍</div><div><div class="ci-l">Location</div><div class="ci-v">Township, Lahore, Pakistan</div></div></div>
+      <div class="ci" style="cursor:default;"><div class="ci-ico">🔗</div><div><div class="ci-l">More Links</div><div class="ci-v" style="font-size:11.5px;color:var(--t3);">Find GitHub & LinkedIn in the nav bar above ↑</div></div></div>
     </div>
     <div class="cnote rv">
       <h3>Open to Opportunities</h3>
       <p>Currently working as an O&M Engineer and actively looking for roles in renewable energy, AI development, embedded systems, or electrical engineering. Open to collaborations and freelance work.</p>
       <div class="cn-av"><span class="cn-av-dot"></span><span>Available for freelance & full-time roles</span></div>
-      <a href="mailto:ee.tahirabbas@gmail.com?subject=Hiring%20Inquiry%20%E2%80%94%20Tahir%20Abbas&body=Hi%20Tahir%2C" class="hbtn hbtn-prim" style="display:inline-flex;">
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=ee.tahirabbas@gmail.com&su=Hiring%20Inquiry%20%E2%80%94%20Tahir%20Abbas&body=Hi%20Tahir%2C" target="_blank" class="hbtn hbtn-prim" style="display:inline-flex;">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
         Send Message
       </a>
@@ -716,7 +718,86 @@ footer b{color:var(--blue);font-weight:500;}
 </div>
 
 <script>
-// ══ RING CANVAS — glow rings + electric sparks behind photo ══
+// ══ FULL PAGE VIBRANT BACKGROUND ══
+const bgC=document.getElementById('bg-canvas');
+const bgX=bgC.getContext('2d');
+let BW,BH;
+function resizeBG(){BW=bgC.width=window.innerWidth;BH=bgC.height=window.innerHeight;}
+resizeBG();window.addEventListener('resize',resizeBG);
+
+const G=60;const bnodes=[];const btraces=[];
+for(let x=G;x<4000;x+=G)for(let y=G;y<7000;y+=G)if(Math.random()<.45)bnodes.push({x,y});
+bnodes.forEach(a=>bnodes.forEach(b=>{
+  if(a===b)return;
+  const dx=b.x-a.x,dy=b.y-a.y;
+  if((Math.abs(dx)===G&&dy===0)||(Math.abs(dy)===G&&dx===0))
+    if(Math.random()<.4)btraces.push({x1:a.x,y1:a.y,x2:b.x,y2:b.y});
+}));
+
+const bgColors=[[91,140,255],[236,72,153],[34,211,238],[251,191,36]];
+class BgSig{
+  constructor(){this.rst();}
+  rst(){
+    const t=btraces[Math.floor(Math.random()*btraces.length)];
+    if(!t)return;
+    this.x1=t.x1;this.y1=t.y1;this.x2=t.x2;this.y2=t.y2;
+    this.p=Math.random();this.spd=.006+Math.random()*.02;
+    this.sz=Math.random()*2+1.2;this.trail=[];this.maxT=11;
+    this.col=bgColors[Math.floor(Math.random()*bgColors.length)];
+  }
+  tick(){
+    this.p+=this.spd;
+    const x=this.x1+(this.x2-this.x1)*this.p;
+    const y=this.y1+(this.y2-this.y1)*this.p;
+    this.trail.push({x,y});
+    if(this.trail.length>this.maxT)this.trail.shift();
+    if(this.p>=1)this.rst();
+  }
+  draw(){
+    this.trail.forEach((pt,i)=>{
+      const a=(i/this.trail.length)*.75;
+      bgX.beginPath();bgX.arc(pt.x,pt.y,this.sz*(i/this.trail.length),0,Math.PI*2);
+      bgX.fillStyle=`rgba(${this.col[0]},${this.col[1]},${this.col[2]},${a})`;bgX.fill();
+    });
+    if(this.trail.length){
+      const h=this.trail[this.trail.length-1];
+      bgX.beginPath();bgX.arc(h.x,h.y,this.sz*2.2,0,Math.PI*2);
+      bgX.fillStyle=`rgba(${this.col[0]},${this.col[1]},${this.col[2]},0.95)`;bgX.fill();
+      const g=bgX.createRadialGradient(h.x,h.y,0,h.x,h.y,this.sz*8);
+      g.addColorStop(0,`rgba(${this.col[0]},${this.col[1]},${this.col[2]},0.35)`);g.addColorStop(1,'transparent');
+      bgX.fillStyle=g;bgX.fillRect(h.x-16,h.y-16,32,32);
+    }
+  }
+}
+class BgPulse{
+  constructor(x,y,col){this.x=x;this.y=y;this.r=0;this.a=.8;this.alive=true;this.col=col;}
+  tick(){this.r+=.7;this.a-=.03;if(this.a<=0)this.alive=false;}
+  draw(){
+    bgX.beginPath();bgX.arc(this.x,this.y,this.r,0,Math.PI*2);
+    bgX.strokeStyle=`rgba(${this.col[0]},${this.col[1]},${this.col[2]},${this.a})`;bgX.lineWidth=1;bgX.stroke();
+  }
+}
+const bgSigs=[];for(let i=0;i<60;i++){const s=new BgSig();if(s.x1!==undefined){s.p=Math.random();bgSigs.push(s);}}
+const bgPulses=[];let bgT=0;
+function bgFrame(){
+  bgX.clearRect(0,0,BW,BH);
+  bgX.strokeStyle='rgba(91,140,255,0.045)';bgX.lineWidth=.8;
+  btraces.forEach(t=>{bgX.beginPath();bgX.moveTo(t.x1,t.y1);bgX.lineTo(t.x2,t.y2);bgX.stroke();});
+  bnodes.forEach(n=>{bgX.beginPath();bgX.arc(n.x,n.y,1.3,0,Math.PI*2);bgX.fillStyle='rgba(91,140,255,0.07)';bgX.fill();});
+  bgSigs.forEach(s=>{s.tick();s.draw();});
+  bgT++;
+  if(bgT%40===0&&Math.random()<.75){
+    const n=bnodes[Math.floor(Math.random()*bnodes.length)];
+    const col=bgColors[Math.floor(Math.random()*bgColors.length)];
+    if(n)bgPulses.push(new BgPulse(n.x,n.y,col));
+  }
+  bgPulses.forEach(p=>{p.tick();p.draw();});
+  for(let i=bgPulses.length-1;i>=0;i--)if(!bgPulses[i].alive)bgPulses.splice(i,1);
+  requestAnimationFrame(bgFrame);
+}
+bgFrame();
+
+// ══ RING CANVAS — vibrant glow rings + electric sparks behind photo ══
 const rc=document.getElementById('ring-canvas');
 const rx=rc.getContext('2d');
 let RW,RH;
@@ -725,21 +806,19 @@ function resizeRC(){
   if(!pw)return;
   const r=pw.getBoundingClientRect();
   RW=rc.width=r.width||500;RH=rc.height=r.height||600;
-  rc.style.position='absolute';rc.style.top='0';rc.style.left='0';
-  rc.style.width='100%';rc.style.height='100%';
 }
 setTimeout(resizeRC,100);window.addEventListener('resize',()=>setTimeout(resizeRC,100));
 
-// Spark particles along rings
 class Spark{
   constructor(cx,cy,radius){
     this.cx=cx;this.cy=cy;this.r=radius;
     this.angle=Math.random()*Math.PI*2;
-    this.spd=(Math.random()>.5?1:-1)*(0.004+Math.random()*.008);
-    this.size=Math.random()*2+1;
-    this.alpha=Math.random()*.8+.2;
-    this.trail=[];this.maxT=12;
-    this.color=Math.random()>.5?'79,142,247':'245,158,11';
+    this.spd=(Math.random()>.5?1:-1)*(0.005+Math.random()*.01);
+    this.size=Math.random()*2.4+1.4;
+    this.alpha=Math.random()*.7+.5;
+    this.trail=[];this.maxT=14;
+    const palette=[[91,140,255],[236,72,153],[34,211,238],[251,191,36]];
+    this.color=palette[Math.floor(Math.random()*palette.length)];
   }
   tick(){
     this.angle+=this.spd;
@@ -750,17 +829,17 @@ class Spark{
   }
   draw(){
     this.trail.forEach((p,i)=>{
-      const a=(i/this.trail.length)*this.alpha*.7;
+      const a=(i/this.trail.length)*this.alpha*.8;
       rx.beginPath();rx.arc(p.x,p.y,this.size*(i/this.trail.length),0,Math.PI*2);
-      rx.fillStyle=`rgba(${this.color},${a})`;rx.fill();
+      rx.fillStyle=`rgba(${this.color[0]},${this.color[1]},${this.color[2]},${a})`;rx.fill();
     });
     if(this.trail.length){
       const h=this.trail[this.trail.length-1];
-      rx.beginPath();rx.arc(h.x,h.y,this.size*1.8,0,Math.PI*2);
-      rx.fillStyle=`rgba(${this.color},${this.alpha})`;rx.fill();
-      const g=rx.createRadialGradient(h.x,h.y,0,h.x,h.y,this.size*6);
-      g.addColorStop(0,`rgba(${this.color},0.3)`);g.addColorStop(1,'transparent');
-      rx.fillStyle=g;rx.fillRect(h.x-10,h.y-10,20,20);
+      rx.beginPath();rx.arc(h.x,h.y,this.size*2,0,Math.PI*2);
+      rx.fillStyle=`rgba(${this.color[0]},${this.color[1]},${this.color[2]},${this.alpha})`;rx.fill();
+      const g=rx.createRadialGradient(h.x,h.y,0,h.x,h.y,this.size*8);
+      g.addColorStop(0,`rgba(${this.color[0]},${this.color[1]},${this.color[2]},0.4)`);g.addColorStop(1,'transparent');
+      rx.fillStyle=g;rx.fillRect(h.x-14,h.y-14,28,28);
     }
   }
 }
@@ -769,40 +848,31 @@ let sparks=[];let ringT=0;
 function drawRing(){
   if(!RW||!RH){requestAnimationFrame(drawRing);return;}
   rx.clearRect(0,0,RW,RH);
-  ringT+=0.008;
-  const cx=RW/2,cy=RH/2;
-  const radii=[Math.min(RW,RH)*.48,Math.min(RW,RH)*.38,Math.min(RW,RH)*.28];
-
-  // Glow background behind photo
-  const bg=rx.createRadialGradient(cx,cy,0,cx,cy,Math.min(RW,RH)*.42);
-  bg.addColorStop(0,'rgba(79,142,247,0.08)');bg.addColorStop(.6,'rgba(79,142,247,0.04)');bg.addColorStop(1,'transparent');
-  rx.fillStyle=bg;rx.fillRect(0,0,RW,RH);
+  ringT+=0.01;
+  const cx=RW/2,cy=RH*.42;
+  const radii=[Math.min(RW,RH)*.5,Math.min(RW,RH)*.39,Math.min(RW,RH)*.28];
+  const colors=[[91,140,255],[236,72,153],[251,191,36]];
 
   radii.forEach((r,i)=>{
-    const alpha=.12-.03*i;
-    const dashOffset=ringT*(i%2===0?60:-40);
-    // Dashed ring
-    rx.save();rx.translate(cx,cy);rx.rotate(ringT*(i%2===0?.3:-.2));
+    const alpha=.28-.05*i;
+    const col=colors[i];
+    rx.save();rx.translate(cx,cy);rx.rotate(ringT*(i%2===0?.4:-.28));
     rx.beginPath();rx.arc(0,0,r,0,Math.PI*2);
-    rx.setLineDash([12,8]);rx.lineDashOffset=dashOffset;
-    rx.strokeStyle=`rgba(79,142,247,${alpha})`;rx.lineWidth=1;rx.stroke();
+    rx.setLineDash([14,9]);rx.lineDashOffset=ringT*40;
+    rx.strokeStyle=`rgba(${col[0]},${col[1]},${col[2]},${alpha})`;rx.lineWidth=1.4;rx.stroke();
     rx.setLineDash([]);rx.restore();
-    // Gold accent arc
-    rx.save();rx.translate(cx,cy);rx.rotate(-ringT*.15+i*.5);
-    rx.beginPath();rx.arc(0,0,r,0,Math.PI*.35);
-    rx.strokeStyle=`rgba(245,158,11,${alpha*1.5})`;rx.lineWidth=1.5;rx.stroke();
+    // Bright accent arc
+    rx.save();rx.translate(cx,cy);rx.rotate(-ringT*.2+i*.7);
+    rx.beginPath();rx.arc(0,0,r,0,Math.PI*.4);
+    rx.strokeStyle=`rgba(${col[0]},${col[1]},${col[2]},${alpha*1.8})`;rx.lineWidth=2;rx.stroke();
     rx.restore();
   });
 
-  // Init sparks
   if(sparks.length===0&&RW>0){
-    radii.forEach(r=>{
-      for(let i=0;i<4;i++)sparks.push(new Spark(cx,cy,r));
-    });
+    radii.forEach(r=>{for(let i=0;i<5;i++)sparks.push(new Spark(cx,cy,r));});
   }else{
     sparks.forEach(s=>{s.cx=cx;s.cy=cy;s.tick();s.draw();});
   }
-
   requestAnimationFrame(drawRing);
 }
 drawRing();
