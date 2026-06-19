@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects — Tahir Abbas</title>
+<meta name="description" content="Projects by Tahir Abbas: SLD AI Explainer, humanoid receptionist robot, STM32 LED cube, home automation, smart blind stick, firefighting robot.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2311161f'/%3E%3Ccircle cx='9' cy='9' r='3' fill='%2354c7d4'/%3E%3Ccircle cx='23' cy='23' r='3' fill='%23c97a3d'/%3E%3Cline x1='9' y1='9' x2='23' y2='23' stroke='%233a4252' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container">
+    <a href="index.html" class="brand"><span class="dot"></span>TAHIR ABBAS</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="projects.html" class="active">Projects</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<header class="page-header">
+  <div class="container reveal">
+    <span class="eyebrow">Projects</span>
+    <h1>Six builds, one habit: make the system explain itself.</h1>
+    <p>From a live AI app reading electrical diagrams to a robot that occasionally walks into walls — here's what I've shipped.</p>
+  </div>
+</header>
+
+<section class="section" style="border-top:none; padding-top:0;">
+  <div class="container">
+    <div class="featured-card tilt-card reveal">
+      <div class="featured-media">
+        <img src="images/project-sld.png" alt="SLD AI Explainer interface showing a single-line diagram breakdown">
+      </div>
+      <div class="featured-body">
+        <span class="status-pill"><span class="dot"></span>Live</span>
+        <h3>SLD AI Explainer</h3>
+        <p>An AI-powered single-line diagram analyzer. Upload an SLD and get a component breakdown, fault diagnosis, and power-flow analysis back in plain English.</p>
+        <div class="tag-row">
+          <span class="tag">Python</span>
+          <span class="tag">Gradio</span>
+          <span class="tag">Google Gemini API</span>
+          <span class="tag">Hugging Face Spaces</span>
+        </div>
+        <div class="btn-row">
+          <a href="https://huggingface.co/spaces/ee-tahirabbas/sld-ai-explainer" class="btn btn-primary" target="_blank" rel="noopener">Try it live</a>
+          <a href="https://github.com/ee-tahirabbas/sld-ai-explainer" class="btn btn-ghost" target="_blank" rel="noopener">View code</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">More Builds</span>
+      <h2>Academic &amp; team projects</h2>
+    </div>
+
+    <div class="project-grid">
+
+      <div class="project-card tilt-card reveal">
+        <div class="project-media"><img src="images/project-robot.png" alt="Humanoid receptionist robot built on Raspberry Pi"></div>
+        <div class="project-body">
+          <span class="status-pill muted"><span class="dot"></span>Code on GitHub</span>
+          <h4>Humanoid Receptionist Robot</h4>
+          <p>Final Year Project, 2024 — a Raspberry Pi humanoid with facial recognition, voice interaction, a chatbot, and map-based navigation. Built with Zubair Usman and Shahroz Khalid, supervised by Engr. Osama Bin Naeem.</p>
+          <div class="tag-row small">
+            <span class="tag">Raspberry Pi 4</span>
+            <span class="tag">OpenCV</span>
+            <span class="tag">ChatterBot</span>
+            <span class="tag">Tkinter</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/ee-tahirabbas/humanoid-robo-receptionist" target="_blank" rel="noopener">GitHub →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card tilt-card reveal">
+        <div class="project-media"><img src="images/project-led.png" alt="Disco LED cube driven by an STM32"></div>
+        <div class="project-body">
+          <span class="status-pill muted"><span class="dot"></span>Academic Project</span>
+          <h4>Disco LED Cube</h4>
+          <p>A programmable 3D LED cube with custom light animations, driven straight from Assembly/C++ on an STM32 via Keil uVision.</p>
+          <div class="tag-row small">
+            <span class="tag">STM32</span>
+            <span class="tag">Assembly</span>
+            <span class="tag">C++</span>
+            <span class="tag">GPIO</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card tilt-card reveal">
+        <div class="project-media"><img src="images/project-home.png" alt="Home automation system circuit"></div>
+        <div class="project-body">
+          <span class="status-pill muted"><span class="dot"></span>Academic Project</span>
+          <h4>Home Automation System</h4>
+          <p>IoT-based remote control for home appliances, built and proven out in embedded C and Proteus simulation before touching real hardware.</p>
+          <div class="tag-row small">
+            <span class="tag">IoT</span>
+            <span class="tag">Embedded C</span>
+            <span class="tag">Proteus</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card tilt-card reveal">
+        <div class="project-media"><img src="images/project-stick.png" alt="Smart blind stick with ultrasonic sensor"></div>
+        <div class="project-body">
+          <span class="status-pill muted"><span class="dot"></span>Academic Project</span>
+          <h4>Smart Blind Stick</h4>
+          <p>An ultrasonic cane that warns its user of obstacles through vibration and audio feedback, built around a custom PCB.</p>
+          <div class="tag-row small">
+            <span class="tag">Ultrasonic Sensing</span>
+            <span class="tag">Custom PCB</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card tilt-card reveal">
+        <div class="project-media"><img src="images/project-fire.png" alt="Firefighting robotic car with flame sensors"></div>
+        <div class="project-body">
+          <span class="status-pill muted"><span class="dot"></span>Academic Project</span>
+          <h4>Firefighting Robotic Car</h4>
+          <p>An Arduino car that sniffs out flame sensors, douses what it finds, and steers around whatever's in its way.</p>
+          <div class="tag-row small">
+            <span class="tag">Arduino</span>
+            <span class="tag">Flame Sensors</span>
+            <span class="tag">Obstacle Avoidance</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>© 2026 Tahir Abbas — Lahore, Pakistan</p>
+    <div class="footer-links">
+      <a href="https://github.com/ee-tahirabbas" target="_blank" rel="noopener">GitHub</a>
+      <a href="mailto:ee.tahirabbas@gmail.com">Email</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
